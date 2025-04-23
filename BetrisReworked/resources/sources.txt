@@ -1,0 +1,9 @@
+SFX SOURCES:
+
+game over sound: https://freesound.org/people/EVRetro/sounds/533034/
+delete line: https://freesound.org/people/Shaun105/sounds/268168/
+rotation: https://freesound.org/people/florianreichelt/sounds/683101/
+collision: https://freesound.org/people/jeckkech/sounds/391658/?
+
+BACKGROUND SONG:
+https://freesound.org/people/StephieQueen/sounds/650556/
