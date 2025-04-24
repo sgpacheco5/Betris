@@ -1,0 +1,1 @@
+A simple tetris clone created in JSE-17. If you want to play it, you can download the betris.jar file and run it on your computer! If double clicking the file doesn't open the program, try running the command: java -jar MyProgram.jar
