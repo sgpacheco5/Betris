@@ -29,8 +29,8 @@ public class PlayManager {
     // main play area
     final int WIDTH = 360;
     final int HEIGHT = 600;
-    public static int left_x;
-    public static int right_x;
+    public static int left_x; // left-cvoord
+    public static int right_x; // right-coord
     public static int top_y;
     public static int bottom_y;
     
@@ -63,7 +63,8 @@ public class PlayManager {
         BETROMINO_START_X = left_x + (WIDTH/2) - Block.SIZE; //starts block in center of game panel 
         BETROMINO_START_Y = top_y + Block.SIZE;
         
-        NEXT_BETROMINO_X = right_x+175;
+        //UPDATE
+        NEXT_BETROMINO_X = right_x+125;
         NEXT_BETROMINO_Y = top_y+500;
         
         // set the starting betromino and starting next betromino
@@ -134,7 +135,7 @@ public class PlayManager {
     				blockCount++;
     			}
     		}
-    		x+=Block.SIZE; // next column (scanning in increments of block size obviously)
+    		x+=Block.SIZE; // next column (scanning in increments of block size)
     		if(x==right_x) { // at end of row
     			if(blockCount==12) {
     				// reverse loop: start at last index in static blocks and keep decrementing until 0 index is hit
@@ -181,12 +182,12 @@ public class PlayManager {
 
     public void draw(Graphics2D g2) {
     	
-        // Fill play area with light grey background
+        //game board
         g2.setColor(new Color(230, 230, 230));  // Light grey background
-        g2.fillRect(left_x -4, top_y-4, WIDTH+8, HEIGHT+8);
+        g2.fillRect(left_x -1, top_y-1, WIDTH+2, HEIGHT+2);
         
         // Draw dark grey grid for play area
-        g2.setColor(new Color(180, 180, 180));  // Dark grey for grid
+        g2.setColor(Color.darkGray);  // Dark grey for grid
         g2.setStroke(new BasicStroke(1f));
         
         // Draw vertical grid lines
@@ -199,15 +200,15 @@ public class PlayManager {
             g2.drawLine(left_x, y, left_x + WIDTH, y);
         }
     	
-        // draw play area frame
+        // game board frame
         g2.setColor(Color.darkGray);
-        g2.setStroke(new BasicStroke(4f));
-        g2.drawRect(left_x - 4, top_y - 4, WIDTH + 8, HEIGHT + 8); // since stroke is 4px, have to do these calculations so that collision occurs inside of outline instead of outside
+        g2.setStroke(new BasicStroke(1f));
+        g2.drawRect(left_x - 1, top_y - 1, WIDTH + 2, HEIGHT + 2); // since stroke is 1px, have to do these calculations so that collision occurs inside of outline instead of outside
         
         // frame that shows next up betromino
-        int x = right_x + 100;
+        int x = right_x + 50;
         int y = bottom_y - 200;
-        g2.drawRect(x, y, 200, 200);
+        g2.drawRect(x-1, y-1, 202, 202); // dark gray outline
         g2.setColor(new Color(230, 230, 230));  // Light grey background
         g2.fillRect(x, y, 200, 200);
         g2.setColor(Color.darkGray);
@@ -216,7 +217,7 @@ public class PlayManager {
         g2.drawString("UP NEXT", x + 50, y + 60);
        
         // score frame
-        g2.drawRect(x, top_y, 200, 300);
+        g2.drawRect(x-1, top_y-1, 202, 302);
         g2.setColor(new Color(230, 230, 230));  // Light grey background
         g2.fillRect(x, top_y, 200, 300);
         g2.setColor(Color.darkGray);
@@ -227,19 +228,23 @@ public class PlayManager {
         g2.drawString("SCORE: " + score, x, y);
         
         // how to play frame
-        x = left_x - 400;
+        x = left_x - 300;
         y= top_y+30;
-        g2.drawRect(x, top_y, 300, 400);
+        g2.drawRect(x-1, top_y-1, 252, 452);
         g2.setColor(new Color(230, 230, 230));  // Light grey background
-        g2.fillRect(x, top_y, 300, 400);
+        g2.fillRect(x, top_y, 250, 450);
         g2.setColor(Color.darkGray);
         x+=40;
-        g2.drawString("ROTATE:^", x, y);y+=70;
+        g2.drawString("ROTATE: ^", x, y);y+=70;
         g2.drawString("LEFT:  <", x, y);y+=70;
         g2.drawString("RIGHT: >", x, y);y+=70;
         g2.drawString("DOWN:  v", x, y);y+=70;
-        g2.drawString("HARD DROP: space", x, y);y+=70;
+        g2.drawString("HARD", x, y);y+=35;
+        g2.drawString("DROP: space", x, y);y+=70;
         g2.drawString("PAUSE: c", x, y);
+        
+        // high scores
+        
         
         
         // draw current betromino
@@ -276,8 +281,18 @@ public class PlayManager {
             String text = gameOver ? "GAME OVER" : "PAUSED";
             int textWidth = g2.getFontMetrics().stringWidth(text);
             x = pause_x + (boxWidth - textWidth) / 2;
-            y = pause_y + (boxHeight / 2) + 20;
+            y = pause_y + (boxHeight / 2) + 10;
             g2.drawString(text, x, y);
+            
+            //restart text
+            if(gameOver) {
+            	g2.setFont(g2.getFont().deriveFont(15f));
+            	String restartText = "press any key to start again";
+            	int restartWidth = g2.getFontMetrics().stringWidth(restartText);
+            	x = pause_x + (boxWidth - restartWidth) / 2;
+                y = y + 40;
+                g2.drawString(restartText, x, y);
+            }
         }
   
     }

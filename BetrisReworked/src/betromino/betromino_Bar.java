@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class betromino_Bar extends Betromino{
 	public betromino_Bar() {
-		create(new Color(204, 153, 205));
+		create(Color.magenta);
 	}
 	
 	public void setXY(int x, int y) {

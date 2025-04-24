@@ -234,11 +234,20 @@ public class Betromino {
 		}
 	}
 	public void draw(Graphics2D g2) {
+	    // Use each block's draw method instead of directly filling rectangles
+	    b[0].draw(g2);
+	    b[1].draw(g2);
+	    b[2].draw(g2);
+	    b[3].draw(g2);
+	}
+	
+	/*
+	public void draw(Graphics2D g2) {
 		g2.setColor(b[0].c);
 		g2.fillRect(b[0].x, b[0].y, Block.SIZE, Block.SIZE);
 		g2.fillRect(b[1].x, b[1].y, Block.SIZE, Block.SIZE);
 		g2.fillRect(b[2].x, b[2].y, Block.SIZE, Block.SIZE);
 		g2.fillRect(b[3].x, b[3].y, Block.SIZE, Block.SIZE);
 	}
-
+*/
 }

@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable{
-   public static final int WIDTH = 1280;
+   public static final int WIDTH = 1100;
    public static final int HEIGHT = 720;
    final int FPS = 60;
    Thread gameThread; // manages the execution of logic, updates, and rendering in a separate thread
@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable{
 
    public GamePanel() {
 	   // panel settings
-       this.setPreferredSize(new Dimension(1280, 720));
+       this.setPreferredSize(new Dimension(1100, 720));
        this.setBackground(new Color(229, 204, 255));
        this.setLayout((LayoutManager) null);
        
